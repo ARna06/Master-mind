@@ -6,8 +6,57 @@ def introduction
 
   puts"\n \n"
 
-  puts "In this implementation, you have to play the role of code-guesser. The computer will generate a random color sequence and you have to insert your guess as a 4 digit number with digits between 1 and 6 (both included) as here numbers represent color codes. The computer will provide you clues on how good the guess was with indicators.\nNumber of white circles represents number of digits were correctly guessed.\nNumber of white filled circles represents number of digits are in correct position.\nNumber of white empty cicles represents the number of digits which are in the original code but not in correct position.".green
+  puts "In this implementation, you have to play the role of code-guesser. The computer will generate a random color sequence and you have to insert your guess as a 4 digit number with digits between 1 and 6 (both included) as here numbers represent color codes. The computer will provide you clues on how good the guess was with indicators.\nNumber of nerd emojis represents number of digits were correctly guessed.\nNumber of cool emojis represents number of digits are in correct position.\nNumber of emojis represent the number of digits which are in the original code but not in correct position.".green
 
 end
 
-introduction
+def eachTurn
+  puts "Type in your guess : "
+end
+
+class Clue
+
+  def initialize(correct , displaced, guessed, secret)
+    @correct = correct
+    @displaced = displaced
+    @guessed = guessed
+    @secret = secret
+  end
+
+  Colors = {
+    "1" => "#{"1".white.on_blue}",
+    "2" => "#{"2".white.on_green}",
+    "3" => "#{"3".white.on_red}",
+    "4" => "#{"4".white.on_orange}",
+    "5" => "#{"5".white.on_brown}",
+    "6" => "#{"6".white.on_black}",
+  }
+  Hint = {
+    "partial" => "\u{1f913}",
+    "full" => "\u{1f60e}"
+  }
+  def showInput
+    @colorizedInputs = @guessed.map do |item|
+      item = Colors[item]
+    end
+    return @colorizedInputs.join('')
+  end
+
+  def showSolution
+    @colorizedKey = @secret.map do |item|
+      item = Colors[item]
+    end
+    return @colorizedKey.join('')
+  end
+
+  def showHint
+    @hint_array = []
+    @hint_array.push("partial", @displaced)
+    @hint_array.push("full", @correct)
+    @hints = @hint_array.map do |item|
+      item = Hint[item]
+    end
+    return @hints.join('')
+  end
+
+end

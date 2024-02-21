@@ -11,21 +11,21 @@ class Logics
     @prediction = prediction
     @key = secret_key
     @@trials += 1
-  end
 
-  @keyArray = @key.split('')
-  @guessArray = @prediction.split('')
+    @keyArray = @key.split('')
+    @guessArray = @prediction.split('')
 
-  @displaced = @guessArray.select do |item|
-    @keyArray.include?(item)
-  end
-  @i = 0
-  @correct = @guessArray.select do |item|
-    if @keyArray[i] === item
-      @i += 1
-      return true
-    else
-      return false
+    @displaced = @guessArray.select do |item|
+      @keyArray.include?(item)
+    end
+    @i = 0
+    @correct = @guessArray.select do |item|
+      if @keyArray[i] === item
+        @i += 1
+        return true
+      else
+        return false
+      end
     end
   end
 
@@ -38,6 +38,10 @@ class Logics
   end
 
   def showKey
-    puts key
+    return @keyArray
+  end
+
+  def playerInput
+    return @guessArray
   end
 end
