@@ -18,22 +18,15 @@ class Logics
     @displaced = @guessArray.select do |item|
       @keyArray.include?(item)
     end
-    @i = 0
-    @correct = @guessArray.select do |item|
-      if @keyArray[i] === item
-        @i += 1
-        return true
-      else
-        return false
-      end
-    end
+
+    @correct = @guessArray.select.with_index {|item, idx| item === @keyArray[idx]}
   end
 
-  def howManyCorrect?
+  def howManyCorrect
     return @correct.length
   end
 
-  def howManyDisplaced?
+  def howManyDisplaced
     return (@displaced.length - @correct.length)
   end
 

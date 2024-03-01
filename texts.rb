@@ -25,25 +25,25 @@ class Clue
 
   Colors = {
     "1" => "#{"1".white.on_blue}",
-    "2" => "#{"2".white.on_green}",
-    "3" => "#{"3".white.on_red}",
-    "4" => "#{"4".white.on_orange}",
-    "5" => "#{"5".white.on_brown}",
-    "6" => "#{"6".white.on_black}",
+    "2" => "#{"2".black.on_green}",
+    "3" => "#{"3".black.on_red}",
+    "4" => "#{"4".black.on_magenta}",
+    "5" => "#{"5".black.on_yellow}",
+    "6" => "#{"6".white.on_cyan}",
   }
   Hint = {
     "partial" => "\u{1f913}",
     "full" => "\u{1f60e}"
   }
   def showInput
-    @colorizedInputs = @guessed.map do |item|
+    @colorizedInputs = @guessed.split('').map do |item|
       item = Colors[item]
     end
     return @colorizedInputs.join('')
   end
 
   def showSolution
-    @colorizedKey = @secret.map do |item|
+    @colorizedKey = @secret.split('').map do |item|
       item = Colors[item]
     end
     return @colorizedKey.join('')
@@ -51,8 +51,8 @@ class Clue
 
   def showHint
     @hint_array = []
-    @hint_array.push("partial", @displaced)
-    @hint_array.push("full", @correct)
+    @hint_array += ["partial"] * @displaced
+    @hint_array += ["full"] * @correct
     @hints = @hint_array.map do |item|
       item = Hint[item]
     end
